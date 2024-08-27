@@ -20,7 +20,13 @@ class TestReview:
         '''can be added to a transaction and committed to review table with comment column.'''
         with app.app_context():
             assert 'comment' in Review.__table__.columns
-            r = Review(comment='great!')
+            # Create and save a Customer and an Item first
+            c = Customer(name='John Doe')
+            i = Item(name='Sample Item', price=19.99)
+            db.session.add_all([c, i])
+            db.session.commit()
+
+            r = Review(comment='great!', customer=c, item=i)
             db.session.add(r)
             db.session.commit()
             assert hasattr(r, 'id')

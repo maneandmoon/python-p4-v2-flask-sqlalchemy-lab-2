@@ -11,7 +11,7 @@ class TestSerialization:
             c = Customer(name='Phil')
             db.session.add(c)
             db.session.commit()
-            r = Review(comment='great!', customer=c)
+            r = Review(comment='great!', customer=c, item=Item(name='Sample Item', price=10.0))  # Make sure item is provided
             db.session.add(r)
             db.session.commit()
             customer_dict = c.to_dict()
@@ -27,7 +27,7 @@ class TestSerialization:
             i = Item(name='Insulated Mug', price=9.99)
             db.session.add(i)
             db.session.commit()
-            r = Review(comment='great!', item=i)
+            r = Review(comment='great!', item=i, customer=Customer(name='Sample Customer'))  # Make sure customer is provided
             db.session.add(r)
             db.session.commit()
 
