@@ -18,7 +18,7 @@ class Customer(db.Model, SerializerMixin):
     name = db.Column(db.String, nullable=False)
 
     reviews = db.relationship('Review', back_populates='customer')
-    # items = association_proxy('reviews', 'item')
+    items = association_proxy('reviews', 'item')
     
     serialize_rules = ('-reviews.customer',)
     
